@@ -64,5 +64,48 @@ class DogTableViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.update(with: dog)
         return cell
     }
+    
+    /**
+     Method called to prepare for segue to Dog Detail View Controller.
+     Grabs the dog information from selected row in table view, and stores it in destination's (DogDetailViewController) dogOptional property.
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            // identify where the segue takes us to
+            if identifier == "DetailSegue" {
+                // type cast segue's destination to be of type DogDetailViewController
+                // This gives us access to DogDetailViewController's properties/methods
+                if let dogDetailVC = segue.destination as? DogDetailViewController {
+                    // grab index of selected row in table view
+                    if let indexPath = tableView.indexPathForSelectedRow {
+                        // store dog information for selected dog in variable
+                        let dog = dogs[indexPath.row]
+                        // send dog information to segue's destination, and store in dogOptional property
+                        dogDetailVC.dogOptional = dog
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+    Method called to unwind back to DogTable View Controller.
+     */
+    @IBAction func unwindToDogTableViewController(segue: UIStoryboardSegue) {
+        // grab the updated dog from the source view controller (DogDetailViewController)
+        if let identifier = segue.identifier {
+            if identifier == "SaveUnwindSegue" {
+                if let dogDetailVC = segue.source as? DogDetailViewController {
+                    if let dog = dogDetailVC.dogOptional {
+                        if let indexPath = tableView.indexPathForSelectedRow {
+                            dogs[indexPath.row] = dog
+                            // force a refresh
+                            tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
