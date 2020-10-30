@@ -66,6 +66,23 @@ class DogTableViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     /**
+     Called when the user has moved (reordered) an entry in a table view.
+     */
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let dog = dogs.remove(at: sourceIndexPath.row)
+        dogs.insert(dog, at: destinationIndexPath.row)
+        
+        // update the underlying data source (dogs array)
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        dogs.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .top)
+    }
+    
+    /**
      Method called to prepare for segue to Dog Detail View Controller.
      Grabs the dog information from selected row in table view, and stores it in destination's (DogDetailViewController) dogOptional property.
      */
@@ -117,6 +134,11 @@ class DogTableViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+    }
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        let newEditingMode = !tableView.isEditing
+        tableView.setEditing(newEditingMode, animated: true)
     }
 }
 
