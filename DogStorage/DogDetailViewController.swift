@@ -49,6 +49,12 @@ class DogDetailViewController: UIViewController {
                         dog.name = name
                         dog.breed = breed
                     }
+                    // if the user pressed the "+" button on last screen
+                    else {
+                        // dog is nil
+                        // which means we got here from an Add Segue
+                        dogOptional = Dog(name: name, breed: breed)
+                    }
                 }
             }
         }

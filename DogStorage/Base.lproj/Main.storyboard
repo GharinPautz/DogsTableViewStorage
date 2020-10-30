@@ -73,7 +73,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1ep-OG-A3w"/>
+                    <navigationItem key="navigationItem" id="1ep-OG-A3w">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="fmW-aS-CfN">
+                            <connections>
+                                <segue destination="p20-ll-tNf" kind="show" identifier="AddSegue" id="oh6-cR-Le7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PTz-sh-Ckg" id="M8I-mt-NeV"/>
                     </connections>
@@ -172,4 +178,10 @@
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus" catalog="system" width="64" height="56"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oh6-cR-Le7"/>
+    </inferredMetricsTieBreakers>
 </document>
