@@ -79,6 +79,7 @@ class DogTableViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         dogs.remove(at: indexPath.row)
         
+        // this shows the animation when the delete button is pressed
         tableView.deleteRows(at: [indexPath], with: .top)
     }
     

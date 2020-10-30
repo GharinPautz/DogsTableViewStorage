@@ -8,13 +8,17 @@
 
 import Foundation
 
+// author credit for dog image: <div>Icons made by <a href="https://www.flaticon.com/
+
 class Dog {
     var name: String
     var breed: String
+    var imageName: String
     
     init(name: String, breed: String) {
         self.name = name
         self.breed = breed
+        self.imageName = "dog"
     }
     
     
