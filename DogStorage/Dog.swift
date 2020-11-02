@@ -47,7 +47,7 @@ class Dog: Codable {
         // this is called an initialization closure
         let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         // userDomainMask refers to the user's home directory
-        let fileURL = documentsDirectoryURL.appendingPathExtension("dogs").appendingPathExtension("plist")
+        let fileURL = documentsDirectoryURL.appendingPathComponent("dogs").appendingPathExtension("plist")
             return fileURL
     }()
     
