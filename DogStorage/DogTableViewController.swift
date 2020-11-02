@@ -19,20 +19,32 @@ import UIKit
 
 class DogTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var dogs = [Dog]()
+    var dogs = [Dog]() {
+        didSet {
+            Dog.saveDogsToFile(dogs: dogs)
+            // another place we could call this method...
+            // applicationDidEnterBackground()
+        }
+    }
     
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print(Dog.pListURL)
         initializeDogs()
     }
     
     func initializeDogs() {
-        dogs.append(Dog(name: "Abigail", breed: "Labrador Retriever"))
-        dogs.append(Dog(name: "Sampson", breed: "Dauchsund"))
-        dogs.append(Dog(name: "Daphne", breed: "Golden Doodle"))
+        if let decodedDogs = Dog.loadDogsFromFile() {
+            dogs = decodedDogs
+        }
+        else {
+            dogs.append(Dog(name: "Abigail", breed: "Labrador Retriever"))
+            dogs.append(Dog(name: "Sampson", breed: "Dauchsund"))
+            dogs.append(Dog(name: "Daphne", breed: "Golden Doodle"))
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
